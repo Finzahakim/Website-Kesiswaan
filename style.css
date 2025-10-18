@@ -305,6 +305,49 @@ nav ul li a:hover {
 
 /* 4. SECTION PROFIL GURU & KARYAWAN */
 
+/* --- STYLING STATISTIK COUNTER BARU --- */
+
+.stats-counter-section {
+    /* Sudah tanpa background gelap */
+    padding: 60px 0;
+    margin-top: 50px;
+}
+
+.stats-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    padding: 0 var(--side-padding-desktop);
+    text-align: center;
+}
+
+.stat-card {
+    flex: 1;
+    padding: 0 15px;
+}
+
+.stat-number {
+    font-size: 3.5rem;
+    font-weight: 800;
+    /* PERBAIKAN: Pastikan angka berwarna ORANYE */
+    color: var(--color-orange); 
+    display: block;
+    line-height: 1;
+    margin-bottom: 10px;
+}
+
+.stat-label {
+    font-size: 1rem;
+    /* PERBAIKAN: Pastikan label berwarna GELAP */
+    color: var(--color-dark); 
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ... (Kode Media Query Responsif di bawahnya) ... */
+
 .profile-section {
     padding: 80px 0; 
     background-color: var(--color-light); 

@@ -128,17 +128,18 @@
                 
                 <div class="profile-card" data-category="guru">
                     <div class="profile-image-box">
-                        <img src="martin.jpeg" alt="">
+                        <img src="martin.jpeg" alt="Suparini, M.Pd" class="profile-image">
                     </div>
                     <h4 class="profile-name">Martin Malau, S.Pd</h4>
                     <p class="profile-title">Kasubag TU</p>
                 </div>
                 
                 <div class="profile-card" data-category="guru">
-                    <div class="profile-image-box placeholder-image">
-                        </div>
-                    <h4 class="profile-name">Yuniati Azkia, S.Kom</h4>
-                    <p class="profile-title">Guru Informatika</p>
+                    <div class="profile-image-box">
+                        <img src="martin.jpeg" alt="Suparini, M.Pd" class="profile-image">
+                    </div>
+                    <h4 class="profile-name">Martin Malau, S.Pd</h4>
+                    <p class="profile-title">Kasubag TU</p>
                 </div>
                 
                 <div class="profile-card" data-category="guru">
@@ -168,10 +169,34 @@
                 &#10095;
             </button>
             
-        </div>
-    </section>
+        </div>                 <div class="stats-counter-section">
+            <div class="stats-container">
+                
+                <div class="stat-card">
+                    <span class="stat-number" data-target="700">700</span>
+                    <p class="stat-label">Jumlah Murid Aktif</p>
+                </div>
+                
+                <div class="stat-card">
+                    <span class="stat-number" data-target="98">95</span>
+                    <p class="stat-label">Nilai Akreditasi (A)</p>
+                </div>
+                
+                <div class="stat-card">
+                    <span class="stat-number" data-target="75">70</span>
+                    <p class="stat-label">Guru Bersertifikasi Pendidik</p>
+                </div>
+                
+                <div class="stat-card">
+                    <span class="stat-number" data-target="120">100</span>
+                    <p class="stat-label">Total Prestasi Regional/Nasional</p>
+                </div>
 
-    <section id="kegiatan" class="activity-section">
+            </div>
+        </div>
+
+    </section>
+        <section id="kegiatan" class="activity-section">
         <h2 class="section-title">Kegiatan dan Prestasi</h2>
     
         <div class="activity-tabs">
@@ -329,7 +354,7 @@
                                 <li>Laki-laki: Rambut pendek, tidak gondrong, dan tidak diwarnai.</li>
                                 <li>Perempuan: Wajib menggunakan ikat pinggang. Jilbab polos (jika berhijab).</li>
                             </ul>
-                        </div>
+                    </div>
                     </div>
                 </div>
                 
@@ -516,43 +541,77 @@
         });
 
 
-        // ... kode lainnya di dalam window.onload ...
+        // Script untuk Accordion Tata Tertib
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
 
-// ... kode lainnya di dalam window.onload ...
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling; // Mengambil div .accordion-content
+                
+                // Cek apakah konten saat ini sudah terbuka
+                const isOpen = content.classList.contains('open');
 
-// ... kode lainnya di dalam window.onload ...
+                // Tutup semua konten accordion
+                document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('open'));
+                document.querySelectorAll('.accordion-header').forEach(h => h.classList.remove('active'));
 
-        // Script untuk Accordion Tata Tertib
-        const accordionHeaders = document.querySelectorAll('.accordion-header');
-
-        accordionHeaders.forEach(header => {
-            header.addEventListener('click', () => {
-                const content = header.nextElementSibling; // Mengambil div .accordion-content
-                
-                // Cek apakah konten saat ini sudah terbuka
-                const isOpen = content.classList.contains('open');
-
-                // Tutup semua konten accordion
-                document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('open'));
-                document.querySelectorAll('.accordion-header').forEach(h => h.classList.remove('active'));
-
-                // Jika konten saat ini tadi tertutup (isOpen = false), maka buka konten ini
-                if (!isOpen) {
-                    content.classList.add('open');
-                    header.classList.add('active');
-                }
-                
-                // Hapus atau jadikan komentar bagian yang membuat scrolling otomatis:
-                /*
-                setTimeout(() => {
-                     header.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 450);
-                */
-            });
+                // Jika konten saat ini tadi tertutup (isOpen = false), maka buka konten ini
+                if (!isOpen) {
+                    content.classList.add('open');
+                    header.classList.add('active');
+                }
+                
+                // Hapus atau jadikan komentar bagian yang membuat scrolling otomatis:
+                /*
+                setTimeout(() => {
+                     header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 450);
+                */
+            });
         });
 
-    };
+// Tambahkan fungsi ini di dalam window.onload = () => { ... } yang sudah ada
 
+const startCounter = (entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const element = entry.target;
+            const target = parseInt(element.getAttribute('data-target'));
+            let current = 0;
+            const duration = 2000; // 2 detik
+            const step = target / (duration / 10); // Hitung langkah per 10ms
+
+            const updateCounter = () => {
+                current += step;
+                if (current < target) {
+                    element.textContent = Math.ceil(current);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target; // Pastikan angkanya tepat di akhir
+                    observer.unobserve(element); // Stop mengamati setelah selesai hitung
+                }
+            };
+
+            updateCounter();
+        }
+    });
+};
+
+// Pengaturan Intersection Observer
+const statObserver = new IntersectionObserver(startCounter, {
+    root: null, // Mengamati viewport
+    threshold: 0.5 // Mulai menghitung saat 50% elemen terlihat
+});
+
+// Amati setiap elemen statistik
+document.querySelectorAll('.stat-number').forEach(stat => {
+    statObserver.observe(stat);
+});
+
+// Pastikan skrip ini dipanggil saat halaman dimuat
+    };
 </script>
+
+
 </body>
 </html>
