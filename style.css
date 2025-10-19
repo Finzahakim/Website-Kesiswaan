@@ -765,7 +765,7 @@ nav ul li a:hover {
 
 /* Konten yang terlihat (PERBAIKAN: Meningkatkan max-height agar semua seragam muat) */
 .accordion-content.open {
-    max-height: 3700px; /* Ditingkatkan dari 500px ke 1500px (atau 2000px untuk lebih aman) */
+    max-height: 5000px; /* Ditingkatkan dari 500px ke 1500px (atau 2000px untuk lebih aman) */
     padding: 20px 25px 25px 25px;
 }
 
